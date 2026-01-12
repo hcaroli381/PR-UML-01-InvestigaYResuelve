@@ -1,5 +1,6 @@
 package pr01;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
@@ -7,19 +8,26 @@ public class Pedido {
 	private List<Producto> productos;
 	private EstadoPedido estado;
 
-	public Pedido(int numero) {
+	public Pedido(int numero) {// constructor pedido
 		this.numero = numero;
+		this.productos = new ArrayList<>();
+		this.estado = EstadoPedido.PENDIENTE;
 	}
 
-	public void agregarProducto(List<Producto> productos) {
-
+	public void agregarProducto(Producto p) {
+		this.productos.add(p);
 	}
 
-	/*
-	 * public double calcularTotal() {
-	 * 
-	 * }
-	 */
+	public double calcularTotal() {
+		double total = 0;
+		for (int i = 0; i < this.productos.size(); i++) {
+			Producto p = this.productos.get(i);
+			total += p.getPrecio();
+		}
+
+		return total;
+	}
+
 	public int getNumero() {
 		return this.numero;
 	}
